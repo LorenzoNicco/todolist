@@ -16,14 +16,14 @@
         <h1 class="text-center">TODO List</h1>
 
         <form method="POST" action="">
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
+            <input type="hidden" name="id" value="<?php echo $oldTask['id']; ?>">
 
             <input id="task-input" type="text" placeholder="Inserisci un task" name="new-task" value="<?php echo $oldTask['task']; ?>" required>
 
             <?php if ($editFlag === false) { ?>
                 <button type="submit" id="btn-create" name="save" class="bg-cyan-500 text-white">Salva</button>
             <?php }else { ?>
-                <button type="submit" id="btn-create" name="edit" class="bg-cyan-500 text-white">Modifica</button>
+                <button type="submit" id="btn-create" name="update" class="bg-cyan-500 text-white">Modifica</button>
             <?php } ?>
         </form>
 
