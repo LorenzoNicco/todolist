@@ -19,4 +19,6 @@
     include 'read.php';
     include 'edit.php';
     include 'delete.php';
+
+    $conn->close();
 ?>

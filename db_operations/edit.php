@@ -1,6 +1,4 @@
 <?php
-    global $conn;
-
     //Quando clicco sul pulsante modifica, vado a leggere la richiesta get
     if (isset($_GET['edit'])) {
         //Salvo il contenuto della richiesta in una variabile per usarla come riferimento e cambio la flag
@@ -17,6 +15,7 @@
         }
     }
 
+    //Verifico che la richiesta sia update
     if (isset($_POST['update'])) {
         //Prendo il nuovo nome e il riferimento del task
         $taskUpdatedName = $_POST['new-task'];
@@ -24,6 +23,7 @@
 
         //Lancio la query e ricarico la pagina
         $sql = "UPDATE `tasks` SET `task`='$taskUpdatedName' WHERE `id`=$taskUpdatedId;";
+        $conn->query($sql);
         header('location: index.php');
     }
 ?>

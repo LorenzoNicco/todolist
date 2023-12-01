@@ -32,7 +32,7 @@
                 <p class="inline-block w-24"><?php echo $singleTask['task']; ?></p>
 
                 <a href="index.php?edit=<?php echo $singleTask['id']; ?>" class="bg-yellow-500 text-white" >Modifica</a>
-                <a href="index.php?edit=<?php echo $singleTask['id']; ?>" class="bg-red-500 text-white" >Elimina</a>
+                <a href="index.php?delete=<?php echo $singleTask['id']; ?>" class="bg-red-500 text-white" >Elimina</a>
             </div>
         <?php } ?>
 

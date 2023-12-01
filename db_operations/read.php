@@ -1,6 +1,4 @@
 <?php
-    global $conn;
-
     //Inizializzo la lista dei task
     $taskList = [];
 
