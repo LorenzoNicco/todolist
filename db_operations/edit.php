@@ -25,12 +25,5 @@
         //Lancio la query e ricarico la pagina
         $sql = "UPDATE `tasks` SET `task`='$taskUpdatedName' WHERE `id`=$taskUpdatedId;";
         header('location: index.php');
-
-        //Verifico che la modifica sia andata a buon fine
-        if ($conn->query($sql) === true) {
-            echo "Task aggiornato con successo!";
-        }else {
-            echo "Errore nell'aggiornamento del task: " . $conn->error;
-        }
     }
 ?>

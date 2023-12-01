@@ -18,4 +18,5 @@
     include 'create.php';
     include 'read.php';
     include 'edit.php';
+    include 'delete.php';
 ?>
