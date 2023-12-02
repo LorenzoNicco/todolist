@@ -27,7 +27,8 @@
             <?php if ($editFlag === false) { ?>
                 <button type="submit" id="btn-create" name="save" class="bg-cyan-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-floppy-disk"></i></button>
             <?php }else { ?>
-                <button type="submit" id="btn-create" name="update" class="bg-emerald-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-check"></i></button>
+                <button type="submit" id="btn-edit" name="update" class="bg-emerald-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-check"></i></button>
+                <a href="index.php" class="bg-red-400 text-white py-1.5 px-2 rounded inline-block" ><i class="fa-solid fa-xmark"></i></a>
             <?php } ?>
         </form>
 
