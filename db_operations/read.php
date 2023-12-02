@@ -13,9 +13,7 @@
         while ($row = $result->fetch_assoc()) {
             $taskList[] = $row;
         }
-    }elseif ($result) {
-        echo "Nessun contenuto";
-    }else {
+    }elseif (!$result) {
         echo "Errore nella query: " . $conn->error;
     }
 ?>

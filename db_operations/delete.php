@@ -11,4 +11,11 @@
         //Ricarico la pagina
         header('location: index.php');
     }
+
+    if (isset($_POST['clear'])) {
+        $sql = "DELETE FROM `tasks`";
+        $conn->query($sql);
+        //Ricarico la pagina
+        header('location: index.php');
+    }
 ?>

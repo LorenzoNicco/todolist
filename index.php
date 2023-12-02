@@ -33,6 +33,10 @@
         </form>
 
         <div class="w-1/2 my-0 mx-auto p-7 rounded-xl bg-slate-200">
+            <?php if (empty($taskList)) { ?>
+                <p class="text-center">Nessun Task presente</p>
+            <?php } ?>
+
             <?php foreach ($taskList as $singleTask) { ?>
                 <div class="flex justify-between items-center mb-3">
                     <!-- Mostra nome task -->
@@ -40,10 +44,16 @@
     
                     <!-- Pulsanti modifica/elimina -->
                     <div>
-                        <a href="index.php?edit=<?php echo $singleTask['id']; ?>" class="bg-yellow-500 text-white py-1.5 px-2 rounded" ><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="index.php?delete=<?php echo $singleTask['id']; ?>" class="bg-red-500 text-white py-1.5 px-2 rounded" ><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="index.php?edit=<?php echo $singleTask['id']; ?>" class="bg-yellow-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="index.php?delete=<?php echo $singleTask['id']; ?>" class="bg-red-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-trash-can"></i></a>
                     </div>
                 </div>
+            <?php } ?>
+
+            <?php if (!empty($taskList)) { ?>
+                <form method="POST" class="text-center">
+                    <button type="submit" id="btn-clear" name="clear" class="bg-red-500 text-white py-1.5 px-2 rounded">Elimina tutti i task</button>
+                </form>
             <?php } ?>
         </div>
 
