@@ -18,11 +18,11 @@
         <h1 class="text-center text-3xl font-bold my-7">TODO List</h1>
 
         <!-- Form di inserimento dati -->
-        <form method="POST" action="" class="w-fit my-0 mx-auto mb-5">
+        <form method="POST" action="" class="w-1/2 text-center my-0 mx-auto mb-5">
             <!-- Input nascosto per l'id -->
             <input type="hidden" name="id" value="<?php echo $oldTask['id']; ?>">
 
-            <input id="task-input" class="ps-1 py-1 rounded border-2 me-2" type="text" placeholder="Inserisci un task" name="new-task" value="<?php echo $oldTask['task']; ?>" required>
+            <input id="task-input" class="w-1/2 ps-1 py-1 rounded border-2 me-2" type="text" placeholder="Inserisci un task" name="new-task" value="<?php echo $oldTask['task']; ?>" required>
 
             <?php if ($editFlag === false) { ?>
                 <button type="submit" id="btn-create" name="save" class="bg-cyan-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-floppy-disk"></i></button>
@@ -31,11 +31,11 @@
             <?php } ?>
         </form>
 
-        <div class="w-1/2 my-0 mx-auto">
+        <div class="w-1/2 my-0 mx-auto p-7 rounded-xl bg-slate-200">
             <?php foreach ($taskList as $singleTask) { ?>
                 <div class="flex justify-between items-center mb-3">
                     <!-- Mostra nome task -->
-                    <p class="grow self-stretch ps-1 py-1 rounded border-2 me-2"><?php echo $singleTask['task']; ?></p>
+                    <p class="grow self-stretch ps-1 py-1 rounded border-2 me-2 bg-white border-slate-600"><?php echo $singleTask['task']; ?></p>
     
                     <!-- Pulsanti modifica/elimina -->
                     <div>
