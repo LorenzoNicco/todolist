@@ -12,6 +12,7 @@
         header('location: index.php');
     }
 
+    //Verifico che POST sia impostato su clear
     if (isset($_POST['clear'])) {
         $sql = "DELETE FROM `tasks`";
         $conn->query($sql);
