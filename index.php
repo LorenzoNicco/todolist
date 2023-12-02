@@ -13,9 +13,11 @@
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body>
-        <h1 class="text-center">TODO List</h1>
+        <h1 class="text-center text-3xl font-bold my-7">TODO List</h1>
 
-        <form method="POST" action="">
+        <!-- Form di inserimento dati -->
+        <form method="POST" action="" class="">
+            <!-- Input nascosto per l'id -->
             <input type="hidden" name="id" value="<?php echo $oldTask['id']; ?>">
 
             <input id="task-input" type="text" placeholder="Inserisci un task" name="new-task" value="<?php echo $oldTask['task']; ?>" required>
@@ -29,8 +31,10 @@
 
         <?php foreach ($taskList as $singleTask) { ?>
             <div>
+                <!-- Mostra nome task -->
                 <p class="inline-block w-24"><?php echo $singleTask['task']; ?></p>
 
+                <!-- Pulsanti modifica/elimina -->
                 <a href="index.php?edit=<?php echo $singleTask['id']; ?>" class="bg-yellow-500 text-white" >Modifica</a>
                 <a href="index.php?delete=<?php echo $singleTask['id']; ?>" class="bg-red-500 text-white" >Elimina</a>
             </div>
