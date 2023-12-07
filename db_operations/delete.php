@@ -1,4 +1,6 @@
 <?php
+    require_once("database.php");
+    
     //Verifico che la richiesta sia delete
     if (isset($_GET['delete'])) {
         //Prendo l'id dell'elemento da eliminare

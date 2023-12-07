@@ -14,11 +14,4 @@
     if ($conn && $conn->connect_error) {
         die("Connessione fallita: " . $conn->connect_error);
     }
-    
-    include 'create.php';
-    include 'read.php';
-    include 'edit.php';
-    include 'delete.php';
-
-    $conn->close();
 ?>

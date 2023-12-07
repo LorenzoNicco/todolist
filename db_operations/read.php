@@ -1,4 +1,6 @@
 <?php
+    require_once("database.php");
+
     //Inizializzo la lista dei task
     $taskList = [];
 
@@ -10,10 +12,16 @@
 
     //Controllo che $result sia vera e che il numero di righe sia maggiore di zero
     if ($result && $result->num_rows > 0) {
+        $data = [];
         while ($row = $result->fetch_assoc()) {
+            $temp; //Variabile temporanea
+            $temp['id'] = $row['id'];
+            $temp['task'] = $row['task'];
+            array_push($data, $temp); //Pushiamo la temporanea in $data
             $taskList[] = $row;
         }
+        echo json_encode($data); //Codifichiamo in json $data
     }elseif (!$result) {
-        echo "Errore nella query: " . $conn->error;
+        echo json_encode($data);
     }
 ?>

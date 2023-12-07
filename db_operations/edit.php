@@ -1,4 +1,6 @@
 <?php
+    require_once("database.php");
+    
     //Quando clicco sul pulsante modifica, vado a leggere la richiesta get
     if (isset($_GET['edit'])) {
         //Salvo il contenuto della richiesta in una variabile per usarla come riferimento e cambio la flag
