@@ -19,7 +19,7 @@
 
             <button type="submit" id="btn-create" name="save" class="bg-cyan-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-floppy-disk"></i></button>
       
-            <button id="btn-edit" class="hidden bg-emerald-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-check"></i></button>
+            <button id="btn-edit" data-val="" class="hidden bg-emerald-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-check"></i></button>
             <button id="btn-cancel" class="hidden bg-red-400 text-white py-1.5 px-2 rounded inline-block" ><i class="fa-solid fa-xmark"></i></button>
         </form>
 

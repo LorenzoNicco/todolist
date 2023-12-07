@@ -82,6 +82,9 @@ function getData() {
     });
 }
 
+//Inizializzo una flag per la modifica
+let editFlag = 0;
+
 //Funzione attivazione edit
 function editTask(e) {
     let taskId = e.currentTarget.dataset.val;
@@ -89,6 +92,7 @@ function editTask(e) {
     
     const formData = new FormData(formElement);
     formData.append('id', taskId);
+    formData.append('flag', editFlag);
     
     // Fetch dei dati per la trovare il task da modificare
     fetch('./db_operations/edit.php', {
@@ -101,16 +105,53 @@ function editTask(e) {
     .then(response => response.json())
     .then(data => {
         mainInput.value = data.task;
+        btnEdit.dataset.val = data.id;
 
         btnCreate.classList.add("hidden");
         btnEdit.classList.remove("hidden");
         btnCancel.classList.remove("hidden");
+
+        editFlag = 1;
+    })
+    .catch((error) => {
+        console.error('Errore: ', error);
+    });    
+}
+
+//Evento modifica
+btnEdit.addEventListener('click', (e) =>{
+    e.preventDefault();
+    taskId = btnEdit.dataset.val;
+    editFlag = 1;
+
+    // Prendo i dati dal form e li salvo nella variabile da mandare
+    const formData = new FormData(document.getElementById("form-element"));
+    dataToInsert = Object.fromEntries(formData.entries());
+    formData.append('data', dataToInsert);
+    formData.append('id', taskId);
+    formData.append('flag', editFlag);
+    
+    // Fetch dei dati per la CREATE
+    fetch('./db_operations/edit.php', {
+        method: 'POST',
+        header: {
+            'Content-Type': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        getData();
+        mainInput.value = '';
+        btnCreate.classList.remove("hidden");
+        btnEdit.classList.add("hidden");
+        btnCancel.classList.add("hidden");
+        editFlag = 0;
     })
     .catch((error) => {
         console.error('Errore: ', error);
     });
-    
-}
+});
 
 //Evento annulla
 btnCancel.addEventListener('click', (e) =>{
@@ -120,6 +161,7 @@ btnCancel.addEventListener('click', (e) =>{
     btnCreate.classList.remove("hidden");
     btnEdit.classList.add("hidden");
     btnCancel.classList.add("hidden");
+    editFlag = 0;
 });
 
 //Funzione elimina

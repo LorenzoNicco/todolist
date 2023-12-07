@@ -17,7 +17,7 @@
         }else {
             $response[] = [
                 "success" => false,
-                "message" => "Errore nell'inserimento de task"
+                "message" => "Errore nell'inserimento del task"
             ];
             echo json_encode($response);
         }
