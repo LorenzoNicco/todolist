@@ -55,6 +55,26 @@ function getData() {
         `;
 
         dataSection.innerHTML = rowsContainer;
+
+        // Prendo i pulsanti modifica e elimina
+        let editBtns = document.querySelectorAll(".edit-task");
+        let deleteBtns = document.querySelectorAll(".delete-task");
+
+        //Evento modifica
+        for (let i = 0; i < editBtns.length; i++) {
+            editBtns[i].addEventListener('click', 
+            function(e) {
+                console.log("Task modificato: ", e.currentTarget.dataset.val);
+            });
+        }
+
+        //Evento elimina
+        for (let i = 0; i < deleteBtns.length; i++) {
+            deleteBtns[i].addEventListener('click', 
+            function(e) {
+                console.log("Task eliminato: ", e.currentTarget.dataset.val);
+            });
+        }
         })
     .catch((error) => {
         console.error('Errore: ', error);
@@ -72,14 +92,14 @@ function rowsGenerator(item) {
 
         rows.push(singleRow);
     }else {
-        item.forEach(singleItem => {           
+        item.forEach(singleItem => {       
             let singleRow = `
             <div class="flex justify-between items-center mb-3">
                 <p class="grow self-stretch ps-1 py-1 rounded border-2 me-2 bg-white border-slate-600">${singleItem.task}</p>
                 
                 <div>
-                    <a href="index.php?edit=${singleItem.id}" class="bg-yellow-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <a href="index.php?delete=${singleItem.id}" class="bg-red-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-trash-can"></i></a>
+                    <button data-val="${singleItem.id}" class="edit-task bg-yellow-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button data-val="${singleItem.id}" class="delete-task bg-red-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
             </div>
             `;
