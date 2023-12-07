@@ -56,29 +56,31 @@ function getData() {
 
         dataSection.innerHTML = rowsContainer;
 
-        // Prendo i pulsanti modifica e elimina
+        // Prendo i pulsanti modifica e elimina e gli aggiungo gli eventi
         let editBtns = document.querySelectorAll(".edit-task");
         let deleteBtns = document.querySelectorAll(".delete-task");
 
-        //Evento modifica
         for (let i = 0; i < editBtns.length; i++) {
-            editBtns[i].addEventListener('click', 
-            function(e) {
-                console.log("Task modificato: ", e.currentTarget.dataset.val);
-            });
+            editBtns[i].addEventListener('click', editTask);
         }
 
-        //Evento elimina
         for (let i = 0; i < deleteBtns.length; i++) {
-            deleteBtns[i].addEventListener('click', 
-            function(e) {
-                console.log("Task eliminato: ", e.currentTarget.dataset.val);
-            });
+            deleteBtns[i].addEventListener('click', deleteTask);
         }
         })
     .catch((error) => {
         console.error('Errore: ', error);
     });
+}
+
+//Funzione modifica
+function editTask(e) {
+    console.log("Task modificato: ", e.currentTarget.dataset.val);
+}
+
+//Funzione elimina
+function deleteTask(e) {
+    console.log("Task eliminato: ", e.currentTarget.dataset.val);
 }
 
 //Funzione per generare le righe di dati
