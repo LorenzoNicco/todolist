@@ -82,15 +82,18 @@ function rowsGenerator(item) {
                     <a href="index.php?delete=${singleItem.id}" class="bg-red-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-trash-can"></i></a>
                 </div>
             </div>
-                
-            <form method="POST" class="text-center">
-                <button type="submit" id="btn-clear" name="clear" class="bg-red-500 text-white py-1.5 px-2 rounded">Elimina tutti i task</button>
-            </form>
             `;
 
             rows.push(singleRow);
         });
 
+        let clearBtn = `
+        <form method="POST" class="text-center">
+            <button type="submit" id="btn-clear" name="clear" class="bg-red-500 text-white py-1.5 px-2 rounded">Elimina tutti i task</button>
+        </form>
+        `;
+
+        rows.push(clearBtn);
     }
 
     return rows;
