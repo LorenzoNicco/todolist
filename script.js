@@ -7,6 +7,14 @@ getData();
 // Salvo il form in una variabile
 const formElement = document.getElementById("form-element");
 
+//Prendo l'input principale
+let mainInput = document.getElementById("task-input");
+
+//Prendo i pulsanti del form
+let btnCreate = document.getElementById("btn-create");
+let btnEdit = document.getElementById("btn-edit");
+let btnCancel = document.getElementById("btn-cancel");
+
 // Catturo l'evento di submit
 formElement.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -27,6 +35,7 @@ formElement.addEventListener('submit', (e) => {
     .then(response => response.json())
     .then(data => {
         getData();
+        mainInput.value = '';
     })
     .catch((error) => {
         console.error('Errore: ', error);
@@ -56,7 +65,7 @@ function getData() {
 
         dataSection.innerHTML = rowsContainer;
 
-        // Prendo i pulsanti modifica e elimina e gli aggiungo gli eventi
+        // Prendo i pulsanti modifica ed elimina e aggiungo gli eventi
         let editBtns = document.querySelectorAll(".edit-task");
         let deleteBtns = document.querySelectorAll(".delete-task");
 
@@ -73,14 +82,69 @@ function getData() {
     });
 }
 
-//Funzione modifica
+//Funzione attivazione edit
 function editTask(e) {
-    console.log("Task modificato: ", e.currentTarget.dataset.val);
+    let taskId = e.currentTarget.dataset.val;
+    console.log("Task modificato: ", taskId);
+    
+    const formData = new FormData(formElement);
+    formData.append('id', taskId);
+    
+    // Fetch dei dati per la trovare il task da modificare
+    fetch('./db_operations/edit.php', {
+        method: 'POST',
+        header: {
+            'Content-Type': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        mainInput.value = data.task;
+
+        btnCreate.classList.add("hidden");
+        btnEdit.classList.remove("hidden");
+        btnCancel.classList.remove("hidden");
+    })
+    .catch((error) => {
+        console.error('Errore: ', error);
+    });
+    
 }
+
+//Evento annulla
+btnCancel.addEventListener('click', (e) =>{
+    e.preventDefault();
+
+    mainInput.value = '';
+    btnCreate.classList.remove("hidden");
+    btnEdit.classList.add("hidden");
+    btnCancel.classList.add("hidden");
+});
 
 //Funzione elimina
 function deleteTask(e) {
-    console.log("Task eliminato: ", e.currentTarget.dataset.val);
+    let taskId = e.currentTarget.dataset.val;
+    console.log("Task eliminato: ", taskId);
+
+    const formData = new FormData(formElement);
+    formData.append('id', taskId);
+
+    // Fetch dei dati per la DELETE
+    fetch('./db_operations/delete.php', {
+        method: 'POST',
+        header: {
+            'Content-Type': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        getData();
+    })
+    .catch((error) => {
+        console.error('Errore: ', error);
+    });
 }
 
 //Funzione per generare le righe di dati

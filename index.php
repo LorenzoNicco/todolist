@@ -15,18 +15,15 @@
 
         <!-- Form di inserimento dati -->
         <form id="form-element" method="POST" action="" class="w-1/2 text-center my-0 mx-auto mb-5">
-            <!-- Input nascosto per l'id -->
-            <!-- <input id="id-input" type="hidden" name="id"> -->
-
             <input id="task-input" class="w-1/2 ps-1 py-1 rounded border-2 me-2" type="text" placeholder="Inserisci un task" name="new-task" required>
 
-                <button type="submit" id="btn-create" name="save" class="bg-cyan-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-floppy-disk"></i></button>
-<!--      
-                <button type="submit" id="btn-edit" name="update" class="bg-emerald-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-check"></i></button>
-                <a href="index.php" class="bg-red-400 text-white py-1.5 px-2 rounded inline-block" ><i class="fa-solid fa-xmark"></i></a> -->
-
+            <button type="submit" id="btn-create" name="save" class="bg-cyan-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-floppy-disk"></i></button>
+      
+            <button id="btn-edit" class="hidden bg-emerald-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-check"></i></button>
+            <button id="btn-cancel" class="hidden bg-red-400 text-white py-1.5 px-2 rounded inline-block" ><i class="fa-solid fa-xmark"></i></button>
         </form>
 
+        <!-- Spazio per la tabella -->
         <div id="data-section"></div>
 
         <script type="text/javascript" src="script.js"></script>
