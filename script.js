@@ -15,9 +15,6 @@ formElement.addEventListener('submit', (e) => {
     const formData = new FormData(document.getElementById("form-element"));
     dataToInsert = Object.fromEntries(formData.entries());
     formData.append('data', dataToInsert);
-
-    console.log("formData", formData);
-    console.log("data", dataToInsert);
     
     // Fetch dei dati per la CREATE
     fetch('./db_operations/create.php', {
@@ -29,7 +26,6 @@ formElement.addEventListener('submit', (e) => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Dati ricevuti', data);
         getData();
     })
     .catch((error) => {
@@ -49,17 +45,12 @@ function getData() {
     .then(response => response.json())
     .then(data => {
         tasks = data;
-        console.log('Dati ricevuti', data);
 
         dataSection = document.getElementById("data-section");
 
         let rowsContainer = `
             <div class="w-1/2 my-0 mx-auto p-7 rounded-xl bg-slate-200">
                 ${rowsGenerator(tasks)}
-                
-                <form method="POST" class="text-center">
-                    <button type="submit" id="btn-clear" name="clear" class="bg-red-500 text-white py-1.5 px-2 rounded">Elimina tutti i task</button>
-                </form>
             </div>
         `;
 
@@ -74,9 +65,9 @@ function getData() {
 function rowsGenerator(item) {
     let rows = [];
 
-    if (item.lenght == 0) {
+    if (item.length == 0) {
         let singleRow = `
-        <p class="text-center">Nessun Task presente</p>
+        <p class="text-center mb-3">Nessun Task presente</p>
         `;
 
         rows.push(singleRow);
@@ -91,6 +82,10 @@ function rowsGenerator(item) {
                     <a href="index.php?delete=${singleItem.id}" class="bg-red-500 text-white py-1.5 px-2 rounded"><i class="fa-solid fa-trash-can"></i></a>
                 </div>
             </div>
+                
+            <form method="POST" class="text-center">
+                <button type="submit" id="btn-clear" name="clear" class="bg-red-500 text-white py-1.5 px-2 rounded">Elimina tutti i task</button>
+            </form>
             `;
 
             rows.push(singleRow);

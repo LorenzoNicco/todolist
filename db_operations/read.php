@@ -21,7 +21,14 @@
             $taskList[] = $row;
         }
         echo json_encode($data); //Codifichiamo in json $data
-    }elseif (!$result) {
+    }elseif ($result && $result->num_rows == 0) {
+        $data = [];
         echo json_encode($data);
+    }elseif (!$result) {
+        $response[] = [
+            "success" => false,
+            "message" => "Errore nella query."
+        ];
+        echo json_encode($response);
     }
 ?>
