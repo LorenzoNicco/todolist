@@ -58,12 +58,22 @@ function getData() {
         dataSection = document.getElementById("data-section");
 
         let rowsContainer = `
-            <div class="w-1/2 my-0 mx-auto p-7 rounded-xl bg-slate-200">
+            <div class="w-1/2 my-0 mx-auto p-7 rounded-xl bg-slate-200 text-center">
                 ${rowsGenerator(tasks)}
             </div>
         `;
 
         dataSection.innerHTML = rowsContainer;
+        //Prendo il pulsante per eliminare tutti i task
+        let btnClear = document.getElementById("btn-clear");
+        
+        //Evento cancella tutto
+        if (btnClear) {
+            btnClear.addEventListener('click', (e)=>{
+                e.preventDefault();
+                deleteAll();
+            });
+        }
 
         // Prendo i pulsanti modifica ed elimina e aggiungo gli eventi
         let editBtns = document.querySelectorAll(".edit-task");
@@ -84,6 +94,9 @@ function getData() {
 
 //Inizializzo una flag per la modifica
 let editFlag = 0;
+
+//Inizializzo una flag per l'eliminazione
+let deleteFlag = 0;
 
 //Funzione attivazione edit
 function editTask(e) {
@@ -142,11 +155,7 @@ btnEdit.addEventListener('click', (e) =>{
     .then(response => response.json())
     .then(data => {
         getData();
-        mainInput.value = '';
-        btnCreate.classList.remove("hidden");
-        btnEdit.classList.add("hidden");
-        btnCancel.classList.add("hidden");
-        editFlag = 0;
+        clearInput();
     })
     .catch((error) => {
         console.error('Errore: ', error);
@@ -156,21 +165,26 @@ btnEdit.addEventListener('click', (e) =>{
 //Evento annulla
 btnCancel.addEventListener('click', (e) =>{
     e.preventDefault();
+    clearInput();
+});
 
+// Funzione azzera input
+function clearInput() {
     mainInput.value = '';
     btnCreate.classList.remove("hidden");
     btnEdit.classList.add("hidden");
     btnCancel.classList.add("hidden");
     editFlag = 0;
-});
+}
 
-//Funzione elimina
+//Funzione elimina una riga
 function deleteTask(e) {
     let taskId = e.currentTarget.dataset.val;
     console.log("Task eliminato: ", taskId);
-
+    
     const formData = new FormData(formElement);
     formData.append('id', taskId);
+    formData.append('flag', deleteFlag);
 
     // Fetch dei dati per la DELETE
     fetch('./db_operations/delete.php', {
@@ -183,6 +197,31 @@ function deleteTask(e) {
     .then(response => response.json())
     .then(data => {
         getData();
+    })
+    .catch((error) => {
+        console.error('Errore: ', error);
+    });
+}
+
+//Funzione elimina tutto
+function deleteAll(e) {
+    deleteFlag = 1;
+    
+    const formData = new FormData(formElement);
+    formData.append('flag', deleteFlag);
+
+    // Fetch dei dati per la DELETE
+    fetch('./db_operations/delete.php', {
+        method: 'POST',
+        header: {
+            'Content-Type': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        getData();
+        deleteFlag = 0;
     })
     .catch((error) => {
         console.error('Errore: ', error);
@@ -216,9 +255,7 @@ function rowsGenerator(item) {
         });
 
         let clearBtn = `
-        <form method="POST" class="text-center">
-            <button type="submit" id="btn-clear" name="clear" class="bg-red-500 text-white py-1.5 px-2 rounded">Elimina tutti i task</button>
-        </form>
+            <button id="btn-clear" class="bg-red-500 text-white py-1.5 px-2 mt-5 rounded">Elimina tutti i task</button>
         `;
 
         rows.push(clearBtn);
