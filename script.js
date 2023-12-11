@@ -1,8 +1,14 @@
 let tasks;
-let dataSection;
+let dataSection = document.getElementById("data-section");
 
 // Faccio comparire la tabella
 getData();
+
+//Inizializzo una flag per la modifica
+let editFlag = 0;
+
+//Inizializzo una flag per l'eliminazione
+let deleteFlag = 0;
 
 // Salvo il form in una variabile
 const formElement = document.getElementById("form-element");
@@ -55,8 +61,6 @@ function getData() {
     .then(data => {
         tasks = data;
 
-        dataSection = document.getElementById("data-section");
-
         let rowsContainer = `
             <div class="w-1/2 my-0 mx-auto p-7 rounded-xl bg-slate-200 text-center">
                 ${rowsGenerator(tasks)}
@@ -91,12 +95,6 @@ function getData() {
         console.error('Errore: ', error);
     });
 }
-
-//Inizializzo una flag per la modifica
-let editFlag = 0;
-
-//Inizializzo una flag per l'eliminazione
-let deleteFlag = 0;
 
 //Funzione attivazione edit
 function editTask(e) {
